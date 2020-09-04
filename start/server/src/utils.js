@@ -34,14 +34,15 @@ module.exports.createStore = () => {
     $in: Op.in,
   };
 
-  const db = new SQL('database', 'username', 'password', {
-    dialect: 'sqlite',
-    storage: './store.sqlite',
+  const db = new SQL('graphql', 'root', 'toor', {
+    dialect: 'mysql',
+    host: 'percona',
+    port: '3307',
     operatorsAliases,
     logging: false,
   });
 
-  const users = db.define('user', {
+  const users = db.define('User', {
     id: {
       type: SQL.INTEGER,
       primaryKey: true,
@@ -53,7 +54,7 @@ module.exports.createStore = () => {
     token: SQL.STRING,
   });
 
-  const trips = db.define('trip', {
+  const trips = db.define('Trip', {
     id: {
       type: SQL.INTEGER,
       primaryKey: true,
